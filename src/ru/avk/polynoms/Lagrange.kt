@@ -1,4 +1,4 @@
-package ru.smak.polynoms
+package ru.avk.polynoms
 
 import java.util.*
 import kotlin.math.abs

@@ -1,4 +1,4 @@
-package ru.smak.polynoms
+package ru.avk.polynoms
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -51,9 +51,5 @@ class Newton(private var valx: ArrayList<Double>, private var valy: ArrayList<Do
         else {
             return (getTerm(count-1,begin+1,end)-getTerm(count-1,begin,end-1))/(valx[end]-valx[begin]);
         }
-
-
     }
-
-
 }

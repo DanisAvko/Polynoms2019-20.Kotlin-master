@@ -1,4 +1,4 @@
-package ru.smak.polynoms
+package ru.avk.polynoms
 
 open class Polynom(){
 
