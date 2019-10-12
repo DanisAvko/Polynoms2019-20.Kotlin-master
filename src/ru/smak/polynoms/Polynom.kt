@@ -46,30 +46,12 @@ open class Polynom(){
     operator fun times(x: Double) =
         Polynom(Array(c.size){c[it]*x})
 
-    /*operator fun times(x: Double): Polynom {
-        val cf = Array<Double>(c.size){0.0}
-        for (i in cf.indices) {
-            cf[i] = c[i] * x
-        }
-        return Polynom(cf)
-    }*/
-
     operator fun div(x: Double) = this * (1.0 / x)
 
     fun getValue(x: Double): Double {
         var px = 1.0
         return c.reduce{ s, i -> px*=x; s + i * px }
     }
-
-    /*fun getValue(x: Double): Double {
-        var s = c[0]
-        var px = x
-        for (i in 1 until c.size) {
-            s += px * c[i]
-            px *= x
-        }
-        return s
-    }*/
 
     operator fun times(other: Polynom): Polynom {
         val cf =

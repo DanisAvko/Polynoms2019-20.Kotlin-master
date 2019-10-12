@@ -41,7 +41,6 @@ class Newton(private var valx: ArrayList<Double>, private var valy: ArrayList<Do
         }
     }
 
-
     private fun getTerm(count:Int,begin:Int,end:Int): Double {
         if(count==0) {
             return valy[begin]
