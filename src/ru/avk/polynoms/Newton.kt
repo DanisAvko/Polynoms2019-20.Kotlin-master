@@ -34,22 +34,22 @@ class Newton(private var valx: ArrayList<Double>, private var valy: ArrayList<Do
                 {
                     res1=res1*Polynom(arrayOf(-valx[k],1.0))
                 }
-                res+=res1*getTerm(key,0,key);
+                res+=res1*getTerm(0,key);
             }
             c.clear()
             c.addAll(res.c)
         }
     }
 
-    private fun getTerm(count:Int,begin:Int,end:Int): Double {
-        if(count==0) {
+    private fun getTerm(begin:Int,end:Int): Double {
+        if(begin==end) {
             return valy[begin]
         }
-        else if(count==1) {
+        else if(end==begin+1) {
             return (valy[end]-valy[begin])/(valx[end]-valx[begin])
         }
         else {
-            return (getTerm(count-1,begin+1,end)-getTerm(count-1,begin,end-1))/(valx[end]-valx[begin]);
+            return (getTerm(begin+1,end)-getTerm(begin,end-1))/(valx[end]-valx[begin]);
         }
     }
 }
