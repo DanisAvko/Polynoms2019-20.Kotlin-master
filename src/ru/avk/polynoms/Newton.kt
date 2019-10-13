@@ -14,6 +14,7 @@ class Newton(private var valx: ArrayList<Double>, private var valy: ArrayList<Do
             valy.add(y[it])
         }
         createNewton()
+
     }
 
     constructor(vals:Hashtable<Double,Double>): this(ArrayList(), ArrayList()){
