@@ -29,19 +29,23 @@ class Newton(private var valx: ArrayList<Double>, private var valy: ArrayList<Do
             var res=Polynom()
             for (key in valx.indices)
             {
-                var res1=Polynom(arrayOf(1.0))
-                for(k in 0..(key-1))
-                {
-                    res1=res1*Polynom(arrayOf(-valx[k],1.0))
-                }
-                res+=res1*getTerm(0,key);
+                res+=getTermW(key)*getTermF(0,key)
             }
             c.clear()
             c.addAll(res.c)
         }
     }
 
-    private fun getTerm(begin:Int,end:Int): Double {
+    private fun getTermW(key:Int):Polynom {
+        var res=Polynom(arrayOf(1.0))
+        for(k in 0..(key-1))
+        {
+            res*=Polynom(arrayOf(-valx[k],1.0))
+        }
+        return res
+    }
+
+    private fun getTermF(begin:Int,end:Int): Double {
         if(begin==end) {
             return valy[begin]
         }
@@ -49,7 +53,16 @@ class Newton(private var valx: ArrayList<Double>, private var valy: ArrayList<Do
             return (valy[end]-valy[begin])/(valx[end]-valx[begin])
         }
         else {
-            return (getTerm(begin+1,end)-getTerm(begin,end-1))/(valx[end]-valx[begin]);
+            return (getTermF(begin+1,end)-getTermF(begin,end-1))/(valx[end]-valx[begin])
         }
+    }
+
+    fun addNode(x:Double,y:Double) {
+        valx.add(x);
+        valy.add(y);
+        var res=Polynom(c);
+        res+=getTermW(valx.size-1)*getTermF(0,valx.size-1);
+        c.clear()
+        c.addAll(res.c)
     }
 }
