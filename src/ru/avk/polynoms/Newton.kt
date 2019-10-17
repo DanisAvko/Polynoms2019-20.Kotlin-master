@@ -4,8 +4,8 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class Newton(private var valx: ArrayList<Double>, private var valy: ArrayList<Double>):Polynom() {
-    var res1=Polynom(arrayOf(1.0))
-    var cal=Hashtable<Pair<Int,Int>,Double>()
+    var termW=Polynom(arrayOf(1.0))
+    var termsF=Hashtable<Pair<Int,Int>,Double>()
     init{
         createNewton()
     }
@@ -32,11 +32,11 @@ class Newton(private var valx: ArrayList<Double>, private var valy: ArrayList<Do
         if(valx.size>0)
         {
             var res=Polynom()
-            res+=res1*getTermF(0,0)
+            res+=termW*getTermF(0,0)
             for (key in 1..(valx.size-1))
             {
-                res1*=Polynom(arrayOf(-valx[key-1],1.0))
-                res+=res1*getTermF(0,key)
+                termW*=Polynom(arrayOf(-valx[key-1],1.0))
+                res+=termW*getTermF(0,key)
             }
             c.clear()
             c.addAll(res.coeffs)
@@ -45,27 +45,27 @@ class Newton(private var valx: ArrayList<Double>, private var valy: ArrayList<Do
 
     private fun getTermF(begin:Int,end:Int): Double {
         if (begin == end) {
-            cal[Pair(begin,begin)]=valy[begin]
+            termsF[Pair(begin,begin)]=valy[begin]
             return valy[begin]
         } else if (end == begin + 1) {
-            cal[Pair(begin,end)]=(valy[end] - valy[begin]) / (valx[end] - valx[begin])
-            return cal.getValue(Pair(begin,end))
+            termsF[Pair(begin,end)]=(valy[end] - valy[begin]) / (valx[end] - valx[begin])
+            return termsF.getValue(Pair(begin,end))
         } else {
-            if(cal.keys.contains(Pair(begin,end)))return cal.getValue(Pair(begin,end))
+            if(termsF.keys.contains(Pair(begin,end)))return termsF.getValue(Pair(begin,end))
             else {
-                cal[Pair(begin,end)]=(getTermF(begin + 1, end) - getTermF(begin, end - 1)) / (valx[end] - valx[begin])
-                return cal.getValue(Pair(begin,end))
+                termsF[Pair(begin,end)]=(getTermF(begin + 1, end) - getTermF(begin, end - 1)) / (valx[end] - valx[begin])
+                return termsF.getValue(Pair(begin,end))
             }
         }
     }
            fun addNode(x: Double, y: Double) {
                if(!valx.contains(x)) {
-                   valx.add(x);
-                   valy.add(y);
+                   valx.add(x)
+                   valy.add(y)
 
-            var res = Polynom(c);
-            res1*=Polynom(arrayOf(-valx[valx.size-2],1.0))
-            res += res1 * getTermF(0, valx.size - 1);
+            var res = Polynom(c)
+            termW*=Polynom(arrayOf(-valx[valx.size-2],1.0))
+            res += termW * getTermF(0, valx.size - 1)
             c.clear()
             c.addAll(res.coeffs)
                }
