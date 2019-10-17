@@ -2,7 +2,14 @@ package ru.avk.polynoms
 
 open class Polynom(){
 
-    internal val c: ArrayList<Double>
+    protected val c: ArrayList<Double>
+
+    val coeffs: ArrayList<Double>
+        get(){
+            val cf = ArrayList<Double>()
+            cf.addAll(c)
+            return cf
+        }
 
     init{
         c = ArrayList()
@@ -75,7 +82,7 @@ open class Polynom(){
                     res.append(" - ")
                 else if (c[it] > 0 && it != c.size - 1)
                     res.append(" + ")
-                if (Math.abs(c[it]) - 1 > 1e-6 || it == 0)
+                if (Math.abs(Math.abs(c[it]) - 1) > 1e-6 || it == 0)
                     res.append(Math.abs(c[it]))
                 if (it > 0) {
                     res.append('x')

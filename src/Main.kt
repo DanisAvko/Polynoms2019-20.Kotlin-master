@@ -1,29 +1,69 @@
 import ru.avk.polynoms.Lagrange
 import ru.avk.polynoms.Newton
 import ru.avk.polynoms.Polynom
+import java.util.*
 
+/*42.45287402535439 -99.59514408479907
+-88.44713719119545 89.65606733583996
+34.58087474945029 -61.94226181486471
+15.07106302952441 -3.2593237622638327
+-56.04936247572625 -45.13684690087953
+-88.71797883462702 48.81449794422227*/
 fun main() {
-    val l1 = Lagrange(arrayOf(-1.0, 0.0, 1.0,1.0), arrayOf(1.0, 0.0, 1.0,2.0))
-    println(l1)
-    val l2 = Lagrange(arrayOf(-1.0, 0.0, 2.0), arrayOf(-1.0, 0.0, 8.0, 1.0))
-    println(l2)
-    val l3 = Lagrange(arrayOf(-1.0, 0.0, 1.0, 2.0), arrayOf(0.0, 1.0, 2.0, 9.0))
-    println(l3)
-    val l4 = Newton(arrayOf(-1.0, 0.0,1.0), arrayOf(1.0, 0.0,1.0))
-    println(l4)
-    val l5 = Newton(arrayOf(-1.0, 0.0, 2.0), arrayOf(-1.0, 0.0, 8.0, 1.0))
-    println(l5)
-    val l6 = Newton(arrayOf(-1.0, 0.0, 1.0, 2.0), arrayOf(0.0, 1.0, 2.0, 9.0))
-    println(l6)
-    val ls=Newton(arrayOf(), arrayOf());
-    ls.addNode(0.0,0.0)
-    ls.addNode(1.0,1.0)
-    println(ls);
-    ls.addNode(-1.0,1.0)
-    println(ls);
-    val l7 = Newton(arrayOf(-1.5, -0.75, 0.0, 0.75,1.5), arrayOf(-14.1014, -0.931596, 0.0, 0.931596,14.1014))
-    println(l7)
-    val l8 = Lagrange(arrayOf(-1.5, -0.75, 0.0, 0.75,1.5), arrayOf(-14.1014, -0.931596, 0.0, 0.931596,14.1014))
-    println(l8)
+   val x = Random(Date().time)
+    val mm =
+        mutableMapOf<Double, Double>()
+    for (i in 0..100){
+        mm[x.nextDouble()*200-10] =
+            x.nextDouble()*200-10
+    }
+    val l71 = Lagrange(mm)
+    println(l71)
+    val l72 = Newton(mm)
+    println(l72)
 
+
+    mm.keys.forEach{
+        print(it)
+        print(" ")
+        println(mm.getValue(it))
+        println("Лагранж "+l71.getValue(it))
+        println("Ньютон "+l72.getValue(it))
+        println("-------------------------------------------")
+
+
+    }
+    val l2 = Lagrange(arrayOf(-1.0,0.0,1.0,2.0),arrayOf(1.0,0.0,1.0,100.0))
+    println(l2)
+    val l3 = Newton(arrayOf(-1.0,0.0,1.0,1.0),arrayOf(1.0,0.0,1.0,1.0))
+    println(l3)
+    l3.addNode(2.0,100.0)
+    println(l3)
+    l3.addNode(1.0,1.0)
+    print(l3)
+   /* val l2 = Lagrange(arrayOf(-1.0,0.0,1.0,2.0),arrayOf(1.0,0.0,1.0,100.0))
+    println(l2)
+    val l3 = Newton(arrayOf(-1.0,0.0,1.0,2.0),arrayOf(1.0,0.0,1.0,100.0))
+    println(l3)
+    val l4 = Lagrange(arrayOf(0.0,2.0,3.0,5.0),arrayOf(1.0,3.0,2.0,5.0))
+    println(l4)
+    val l5 = Newton(arrayOf(0.0,2.0,3.0,5.0),arrayOf(1.0,3.0,2.0,5.0))
+    println(l5)*/
+        /*   var ar=arrayOf(42.45287402535439, -88.44713719119545,34.58087474945029,15.07106302952441,-56.04936247572625,-88.71797883462702)
+    var ar1=arrayOf(-99.59514408479907, 89.65606733583996, -61.94226181486471,-3.2593237622638327,-45.13684690087953,48.81449794422227)
+    val l1 = Lagrange(arrayOf(42.45287402535439, -88.44713719119545,34.58087474945029,15.07106302952441,-56.04936247572625,-88.71797883462702),
+        arrayOf(-99.59514408479907, 89.65606733583996, -61.94226181486471,-3.2593237622638327,-45.13684690087953,48.81449794422227))
+    val l7 = Newton(arrayOf(42.45287402535439, -88.44713719119545,34.58087474945029,15.07106302952441,-56.04936247572625,-88.71797883462702),
+        arrayOf(-99.59514408479907, 89.65606733583996, -61.94226181486471,-3.2593237622638327,-45.13684690087953,48.81449794422227))
+    println(l1)
+    println(l7)
+    ar.indices.forEach {
+        print(l1.getValue(ar[it]))
+        print(" ")
+        println(l7.getValue(ar[it]))
+        println("------------------")
+    }*/
+    /*- 3.9302986309750913E-4x^4 - 0.017095560019102788x^3 - 0.338615364741962x^2 + 28.69945447446628x - 310.69948807864563
+    2.9216875971171177E-6x^5 + 1.5643487997513714E-4x^4 - 0.01709556001910279x^3 - 0.338615364741962x^2 + 28.699454474466304x - 310.6994880786457
+    */
 }
